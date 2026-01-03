@@ -1,0 +1,115 @@
+
+-- Câu 1
+π_matb, tentuyen, culy, tendonvi (σ_culy > 20000 (tuyenbuyt × dvvanhanh))
+
+-- Câu 2
+π_tramdung.matd, tentram, matb (σ_diadiem LIKE '%HAM NGHI, QUAN 1' (tramdung × lotrinh)) 
+
+-- Câu 3
+π_tramdung.matd, tentram, loai (σ_diadiem LIKE '%QUAN 12' ∧ matb = 3 (tramdung × lotrinh)) 
+
+-- Câu 4
+π_tramdung.matd, tentram, loai (σ_thututram = 1 (tramdung × lotrinh))
+
+-- Câu 5
+π_tuyenbuyt.matb, tentuyen (σ_matd = 4 (tuyenbuyt × lotrinh))
+
+-- Câu 6
+π_distinct(tendonvi) (σ_matd = 53 (dvvanhanh × tuyenbuyt × lotrinh))
+
+-- Câu 7
+π_tuyenbuyt.matb, tentuyen, culy, tentram AS 'tram dung khoi hanh'
+(σ_sochuyen < 250 ∧ thututram = 1 (tuyenbuyt ⨝ tuyenbuyt.matb = lotrinh.matb ⨝ lotrinh.matd = tramdung.matd))
+
+-- Câu 8
+π_tuyenbuyt.matb, tentuyen (σ_matd = 7 (tuyenbuyt × lotrinh))
+
+-- Câu 9
+π_tuyenbuyt.matb, tentuyen, culy, thututram, tentram, diadiem
+(tuyenbuyt ⨝ tuyenbuyt.matb = lotrinh.matb ⨝ lotrinh.matd = tramdung.matd)
+
+--câu 10
+π_distinct(tuyenbuyt.matb, tentuyen)
+(σ_diadiem LIKE '%DEN THO AN GIAO PASTEUR, QUAN 1'
+ (tuyenbuyt × lotrinh × tramdung))
+
+--câu 11
+SELECT tramdung.matd, tentram, diadiem, matb
+FROM tramdung
+JOIN lotrinh ON tramdung.matd = lotrinh.matd
+WHERE diadiem LIKE '%QUAN 1'
+ORDER BY tentram, matb
+
+
+--câu 12
+π_distinct(tuyenbuyt.matb, tentuyen)
+(σ_diadiem LIKE '%CHỢ BẾN THÀNH%'
+ ( (tuyenbuyt ⨝ tuyenbuyt.matb = lotrinh.matb) ⨝
+
+
+--câu 13
+γ_tendonvi; COUNT(matb)→sltb (dvvanhanh ⨝ madv = madv tuyenbuyt)
+σ_sltb < 2 (...)
+
+
+--câu 14
+γ_tuyenbuyt.matb, tentuyen, culy; COUNT(tramdung.matd)→tongtram
+((tuyenbuyt ⨝ lotrinh) ⨝ tramdung)
+σ_tongtram < 40 (...)
+
+
+--câu 15
+γ_tramdung.matd, tentram; COUNT_DISTINCT(tuyenbuyt.matb)→sotuyen
+((tramdung ⨝ lotrinh) ⨝ tuyenbuyt)
+σ_sotuyen > 1 (...)
+
+
+--câu 16
+γ_tramdung.matd; COUNT_DISTINCT(tuyenbuyt.matb)
+(tramdung ⟕ lotrinh ⟕ tuyenbuyt)
+
+
+--câu 17
+γ_lotrinh.matb, loai; COUNT(tramdung.matd)
+(lotrinh ⨝ lotrinh.matd = tramdung.matd tramdung)
+
+
+--câu 18
+γ_lotrinh.matb; COUNT(tramdung.matd)
+σ_loai = 'NHA CHO' (lotrinh ⨝ lotrinh.matd = tramdung.matd tramdung)
+
+
+--câu 19
+π_matb, tentuyen, culy
+σ_culy = MAX(π_culy (tuyenbuyt)) (tuyenbuyt)
+
+
+--câu 20
+γ_tramdung.matd, tentram; COUNT_DISTINCT(matb)
+(tramdung ⨝ tramdung.matd = lotrinh.matd lotrinh)
+-- Sắp xếp giảm dần và chọn 10 dòng đầu (ghi chú ngoài)
+
+
+--câu 21
+γ_tuyenbuyt.matb, tentuyen; COUNT_DISTINCT(tramdung.matd)
+((tuyenbuyt ⨝ lotrinh) ⨝ tramdung)
+-- Lấy dòng có số lượng lớn nhất
+
+
+--câu 22
+γ_dvvanhanh.madv, tendonvi; COUNT_DISTINCT(tuyenbuyt.matb)
+(dvvanhanh ⨝ tuyenbuyt)
+-- Lấy dòng có số tuyến lớn nhất
+
+
+--câu 23
+π_tuyenbuyt.matb, tentuyen
+σ_td1.tentram = 'TDH XE BUYT SAI GON' ∧ td2.tentram = 'CONG VIEN 30/4'
+(tuyenbuyt ⨝ lt1 ⨝ td1 ⨝ lt2 ⨝ td2)
+
+
+--câu 24
+π_tuyenbuyt.matb, tentuyen
+σ_td1.matd = 31 ∧ td2.matd = 35 ∧ td3.matd = 81
+(tuyenbuyt ⨝ lt1 ⨝ td1 ⨝ lt2 ⨝ td2 ⨝ lt3 ⨝ td3)
+
